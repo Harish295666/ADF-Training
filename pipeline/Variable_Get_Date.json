@@ -1,0 +1,32 @@
+{
+	"name": "Variable_Get_Date",
+	"properties": {
+		"activities": [
+			{
+				"name": "Var_Get_Date",
+				"type": "SetVariable",
+				"dependsOn": [],
+				"policy": {
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"variableName": "Input_Var",
+					"value": {
+						"value": "@addDays(startOfDay(utcNow()),-7 )",
+						"type": "Expression"
+					}
+				}
+			}
+		],
+		"variables": {
+			"Input_Var": {
+				"type": "String"
+			}
+		},
+		"annotations": [],
+		"lastPublishTime": "2025-06-15T17:04:52Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}

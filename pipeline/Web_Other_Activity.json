@@ -1,0 +1,31 @@
+{
+	"name": "Web_Other_Activity",
+	"properties": {
+		"activities": [
+			{
+				"name": "Web1",
+				"type": "WebActivity",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"method": "POST",
+					"url": "https://management.azure.com/subscriptions/e0283d3c-28fe-4888-b828-4c1b9eb92f9f/resourceGroups/RG_ADF_Training2/providers/Microsoft.DataFactory/factories/DF-ADF-Trg2-Test/pipelines/Rest_API/createRun?api-version=2018-06-01",
+					"authentication": {
+						"type": "MSI",
+						"resource": "https://management.azure.com/"
+					}
+				}
+			}
+		],
+		"annotations": [],
+		"lastPublishTime": "2025-06-17T10:49:35Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}

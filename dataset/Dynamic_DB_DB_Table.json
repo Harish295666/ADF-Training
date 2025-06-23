@@ -1,0 +1,17 @@
+{
+	"name": "Dynamic_DB_DB_Table",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "LS_SqlDatabase1",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [],
+		"typeProperties": {
+			"schema": "DBO",
+			"table": "DAILY_COPYLIST2"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

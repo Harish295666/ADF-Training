@@ -1,0 +1,115 @@
+{
+	"name": "Dynamic_lookup_Foreach_Database",
+	"properties": {
+		"activities": [
+			{
+				"name": "Dynamicdb_lookup",
+				"type": "Lookup",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "AzureSqlSource",
+						"queryTimeout": "02:00:00",
+						"partitionOption": "None"
+					},
+					"dataset": {
+						"referenceName": "Dynamic_Tbl",
+						"type": "DatasetReference",
+						"parameters": {
+							"Sch_Name": "DBO",
+							"Tbl_Name": "DAILY_COPYLIST1"
+						}
+					},
+					"firstRowOnly": false
+				}
+			},
+			{
+				"name": "ForEach_DB",
+				"type": "ForEach",
+				"dependsOn": [
+					{
+						"activity": "Dynamicdb_lookup",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"items": {
+						"value": "@activity('Dynamicdb_lookup').output.value",
+						"type": "Expression"
+					},
+					"isSequential": true,
+					"activities": [
+						{
+							"name": "Copy db",
+							"type": "Copy",
+							"dependsOn": [],
+							"policy": {
+								"timeout": "0.12:00:00",
+								"retry": 0,
+								"retryIntervalInSeconds": 30,
+								"secureOutput": false,
+								"secureInput": false
+							},
+							"userProperties": [],
+							"typeProperties": {
+								"source": {
+									"type": "AzureSqlSource",
+									"queryTimeout": "02:00:00",
+									"partitionOption": "None"
+								},
+								"sink": {
+									"type": "AzureSqlSink",
+									"writeBehavior": "insert",
+									"sqlWriterUseTableLock": false
+								},
+								"enableStaging": false,
+								"translator": {
+									"type": "TabularTranslator",
+									"typeConversion": true,
+									"typeConversionSettings": {
+										"allowDataTruncation": true,
+										"treatBooleanAsNumber": false
+									}
+								}
+							},
+							"inputs": [
+								{
+									"referenceName": "Dynamic_Tbl",
+									"type": "DatasetReference",
+									"parameters": {
+										"Sch_Name": "DBO",
+										"Tbl_Name": "lookup_1"
+									}
+								}
+							],
+							"outputs": [
+								{
+									"referenceName": "Dynamic_Tbl_1",
+									"type": "DatasetReference",
+									"parameters": {
+										"Sch_Name": "DBO",
+										"Tbl_Name": "lookup_2"
+									}
+								}
+							]
+						}
+					]
+				}
+			}
+		],
+		"annotations": [],
+		"lastPublishTime": "2025-06-12T16:38:56Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}

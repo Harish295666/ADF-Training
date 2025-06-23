@@ -1,0 +1,9 @@
+{
+	"name": "DF-ADF-Trg2",
+	"location": "centralindia",
+	"identity": {
+		"type": "SystemAssigned",
+		"principalId": "fec988f3-fe42-4bf1-bcb3-12579be116bc",
+		"tenantId": "358f8403-53c9-48e3-b1eb-97307b578ff9"
+	}
+}

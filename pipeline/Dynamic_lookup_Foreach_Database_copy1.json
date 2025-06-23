@@ -1,0 +1,42 @@
+{
+	"name": "Dynamic_lookup_Foreach_Database_copy1",
+	"properties": {
+		"activities": [
+			{
+				"name": "Dynamicdb_lookup1",
+				"type": "Lookup",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "AzureSqlSource",
+						"queryTimeout": "02:00:00",
+						"partitionOption": "None"
+					},
+					"dataset": {
+						"referenceName": "Dynamic_DB_DB_Table",
+						"type": "DatasetReference"
+					}
+				}
+			}
+		],
+		"parameters": {
+			"Sch_Name": {
+				"type": "String"
+			},
+			"Tbl_Name": {
+				"type": "String"
+			}
+		},
+		"annotations": [],
+		"lastPublishTime": "2025-06-12T17:40:17Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}
